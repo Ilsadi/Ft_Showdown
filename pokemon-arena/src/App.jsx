@@ -16,8 +16,8 @@ import * as THREE from 'three'
 	{
 		const texture = useTexture(bakeSol)
 	return (
-	<mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 4.12, 0]}>
-	<planeGeometry args={[20, 14]} />
+	<mesh rotation={[-Math.PI / 2, 0, 0]} position={[19.7, 0.1, 6.8]}>
+	<planeGeometry args={[79, 54.5]} />
 	<meshBasicMaterial map={texture} />
 	</mesh>
 	)
@@ -27,8 +27,8 @@ import * as THREE from 'three'
 	{
 		const texture = useTexture(VictiniSprite)
 		return (
-			<mesh position={[0, 2.80, 0]}>
-				<planeGeometry args={[10, 10]} />
+			<mesh position={[1.5, 0.72, -3.5]}>
+				<planeGeometry args={[3, 3]} />
 				<meshBasicMaterial map={texture} transparent />
 			</mesh>
 		)
