@@ -1,9 +1,12 @@
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, useTexture, useGLTF } from '@react-three/drei'
-import VictiniSprite from './assets/VictiniFront1.png'
+import VictiniFrontImg from './assets/VictiniAnimationFront.png'
+import VictiniBackImg from './assets/VictiniAnimationBack.png'
 import bakeSol from './assets/bakeSol.png'
 import arenaUrl from './assets/Arena_Black_Orange.glb'
 import * as THREE from 'three'
+import { useFrame } from '@react-three/fiber'
+import { useRef } from 'react'
 
 
 
@@ -21,18 +24,72 @@ import * as THREE from 'three'
 	<meshBasicMaterial map={texture} />
 	</mesh>
 	)
-	}
+}
 
-	function PokemonSprite()
-	{
-		const texture = useTexture(VictiniSprite)
-		return (
-			<mesh position={[1.5, 0.72, -3.5]}>
-				<planeGeometry args={[3, 3]} />
-				<meshBasicMaterial map={texture} transparent />
-			</mesh>
-		)
-	}
+function VictiniSpriteFront()
+{
+  const texture = useTexture(VictiniFrontImg)
+  const ref = useRef()
+  
+  const cols = 5
+  const rows = 11
+  const frameRef = useRef(0)
+  const timeRef = useRef(0)
+  
+  texture.repeat.set(1 / cols, 1 / rows)
+  texture.offset.set(0, 1 - 1 / rows)
+  
+  useFrame((state, delta) => {
+    timeRef.current += delta
+    if (timeRef.current > 0.1) {
+      timeRef.current = 0
+      frameRef.current = (frameRef.current + 1) % (cols * rows)
+      const col = frameRef.current % cols
+      const row = Math.floor(frameRef.current / cols)
+      texture.offset.set(col / cols, 1 - (row + 1) / rows)
+    }
+  })
+
+  return (
+    <mesh position={[1.5, 1.1, -3.5]}>
+      <planeGeometry args={[2, 2]} />
+      <meshBasicMaterial map={texture} transparent />
+    </mesh>
+  )
+}
+
+function VictiniSpriteBack()
+{
+  const texture = useTexture(VictiniBackImg)
+  const ref = useRef()
+  
+  const cols = 5
+  const rows = 11
+  const frameRef = useRef(0)
+  const timeRef = useRef(0)
+  
+  texture.repeat.set(1 / cols, 1 / rows)
+  texture.offset.set(0, 1 - 1 / rows)
+  
+  useFrame((state, delta) => {
+    timeRef.current += delta
+    if (timeRef.current > 0.1) {
+      timeRef.current = 0
+      frameRef.current = (frameRef.current + 1) % (cols * rows)
+      const col = frameRef.current % cols
+      const row = Math.floor(frameRef.current / cols)
+      texture.offset.set(col / cols, 1 - (row + 1) / rows)
+    }
+  })
+
+  return (
+     <mesh position={[1.5, 1, -3.5]} rotation={[0, Math.PI, 0]}>
+    <planeGeometry args={[2, 2]} />
+    <meshBasicMaterial map={texture} transparent />
+  	</mesh>
+  )
+}
+
 	function App() {
 	return (
 		<Canvas style={{ width: '100vw', height: '100vh', background: 'black'}}>
@@ -41,8 +98,8 @@ import * as THREE from 'three'
 		<OrbitControls />
 		<ArenaWalls />
 		<ArenaSol />
-		<PokemonSprite/>
-
+		<VictiniSpriteFront/>
+		<VictiniSpriteBack/>
 		</Canvas>
 	)
 	}
