@@ -12,8 +12,7 @@ function App()
 		<OrbitControls />
 		<Arena.ArenaWalls />
 		<Arena.ArenaFloor />
-		<Pokemon.VictiniSpriteFront/>
-		<Pokemon.VictiniSpriteBack/>
+		<Pokemon.Victini position={[2, 0.1, -4]} scale={0.08} />
 		</Canvas>
 	)
 }
