@@ -2,11 +2,11 @@ import { useTexture, useGLTF } from '@react-three/drei'
 import bakedFloor from '../assets/bakeSol.png'
 import Arena from '../assets/Arena_Black_Orange.glb'
 
-export function ArenaWalls()
-{	
-	const { scene } = useGLTF(Arena)
-	return <primitive object={scene} />
-}
+// export function ArenaWalls()
+// {	
+// 	const { scene } = useGLTF(Arena)
+// 	return <primitive object={scene} />
+// }
 export function ArenaFloor()
 {
 	const texture = useTexture(bakedFloor)
