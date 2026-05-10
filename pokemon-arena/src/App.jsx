@@ -19,7 +19,7 @@ function App()
 		<Trainers.Claire position={[0, 0.1, -5]} scale={0.02} />
 		<Trainers.Joelle position={[5, 0.1, -5]} scale ={0.02} />
 		<Trainers.Ilan position={[8, 0.1, -5]} scale ={0.02} />
-		<Trainers.Iness position={[8, 0.1, -5]} scale ={0.02} />
+		<Trainers.Iness position={[11, 0.1, -5]} scale ={0.02} />
 		</Canvas>
 	)
 }
