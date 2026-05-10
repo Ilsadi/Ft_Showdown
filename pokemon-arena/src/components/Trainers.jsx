@@ -35,8 +35,51 @@ export function Joelle({position = [0, 0, 0], scale = 0.05})
 			<AnimatedSprite
 				url="/Joelle2.gif"
 				rotation={[0, 0, 0]}
-				position={[0, 0, 0.0,1]}
+				position={[0, 0, 0.1]}
 				scale={scale}
+			/>
+			<AnimatedSprite
+				url="/happiny.gif"
+				rotation={[0, 0, 0]}
+				position={[0.6, 0.6, 0.3]}
+				scale= {0.0145}
+			/>
+		</group>
+	)
+}
+
+export function Ilan({position = [0, 0, 0], scale = 0.05})
+{
+	return (
+		<group position={position}>
+			<AnimatedSprite
+
+			/>
+			<AnimatedSprite
+				url="/dragapultFront.gif"
+				rotation={[0, 0, 0]}
+				position={[0.6, 0.1, -0.2]}
+				scale={scale}
+			/>
+		</group>
+	)
+}
+
+export function Iness({position = [0, 0, 0], scale = 0.05})
+{
+	return (
+		<group position={position}>
+			<AnimatedSprite
+				url="/iness.gif"
+				rotation={[0, 0, 0]}
+				position={[0, 0, 0.1]}
+				scale={scale}
+			/>
+			<AnimatedSprite
+				url="/happiny.gif"
+				rotation={[0, 0, 0]}
+				position={[0.6, 0.6, 0.3]}
+				scale= {0.0145}
 			/>
 		</group>
 	)
