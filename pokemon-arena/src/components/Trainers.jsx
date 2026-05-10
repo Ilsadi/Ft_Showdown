@@ -55,13 +55,13 @@ export function Ilan({position = [0, 0, 0], scale = 0.05})
 			<AnimatedSprite
 				url="/Ilan.gif"
 				rotation={[0, 0, 0]}
-				position={[0, 0, 0.1]}
+				position={[0, 0, 0.01]}
 				scale={scale}
 			/>
 			<AnimatedSprite
 				url="/dragapultFront.gif"
 				rotation={[0, 0, 0]}
-				position={[0.6, 0.1, -0.2]}
+				position={[0.6, 0.5, -0.1]}
 				scale={scale}
 			/>
 		</group>

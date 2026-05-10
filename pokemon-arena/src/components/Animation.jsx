@@ -95,7 +95,7 @@ export function AnimatedSprite({ url, rotation = [0, 0, 0], position = [0, 0, 0]
 	return (
 		<mesh rotation={rotation} position={adjustedPosition}>
 			<planeGeometry args={[width, height]} />
-			<meshBasicMaterial map={texture} transparent />
+			<meshBasicMaterial map={texture} alphaTest={0.5} />
 		</mesh>
 	)
 }
