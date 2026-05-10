@@ -25,7 +25,7 @@ export default function HomeScene()
 				FT_SHOWDOWN
 				<meshStandardMaterial color="black" />
 			</Text3D>
-			<mesh onClick={() => console.log("clic !")}>
+			<mesh onClick={() => setScene("hub")}>
 				<boxGeometry args={[1, 1, 1]} />
 				<meshStandardMaterial color="blue" />
 			</mesh>
