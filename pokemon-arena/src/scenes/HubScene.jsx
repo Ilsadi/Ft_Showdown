@@ -22,7 +22,7 @@ export default function HubScene()
 
 	return (
 		<div style={{ position: 'relative', width: '100vw', height: '100vh' }}>
-			<Canvas camera={{ position: [0, 5.96, 6] }} style={{ width: '100vw', height: '100vh', background: 'white'}}>
+			<Canvas camera={{ position: [0, 5.96, 6] }} style={{ width: '100vw', height: '100vh', background: '#DEBE75'}}>
 				<directionalLight position={[15, 10, 0]} intensity={1} />
 				<ambientLight intensity={0.5} />
 				<PokemonCenter.HubCenter onReady={handleReady} />
