@@ -1,3 +1,24 @@
+
+//					SPRITE ANIME
+// export function AnimatedSprite({ url, rotation = [0, 0, 0], position = [0, 0, 0], scale = 0.05 })
+// {
+// 	const { texture, dims } = useGifTexture(url)
+// 	texture.magFilter = THREE.NearestFilter
+// 	texture.minFilter = THREE.NearestFilter
+
+// 	if (dims.width === 1 && dims.height === 1) return null
+
+// 	const width = dims.width * scale
+// 	const height = dims.height * scale
+// 	const adjustedPosition = [position[0], position[1] + height / 2, position[2]]
+
+// 	return (
+// 		<mesh rotation={rotation} position={adjustedPosition}>
+// 			<planeGeometry args={[width, height]} />
+// 			<meshBasicMaterial map={texture} alphaTest={0.5} />
+// 		</mesh>
+// 	)
+// }
 import { useRef, useEffect, useState } from 'react'
 import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
@@ -80,13 +101,25 @@ export function useGifTexture(url)
 }
 
 //					SPRITE ANIME
-export function AnimatedSprite({ url, rotation = [0, 0, 0], position = [0, 0, 0], scale = 0.05 })
+export function AnimatedSprite({ url, rotation = [0, 0, 0], position = [0, 0, 0], scale = 0.05, onReady })
 {
 	const { texture, dims } = useGifTexture(url)
 	texture.magFilter = THREE.NearestFilter
 	texture.minFilter = THREE.NearestFilter
 
-	if (dims.width === 1 && dims.height === 1) return null
+	const ready = dims.width !== 1 || dims.height !== 1
+	const signaled = useRef(false)
+
+	useEffect(() =>
+	{
+		if (ready && !signaled.current)
+		{
+			signaled.current = true
+			if (onReady) onReady()
+		}
+	}, [ready, onReady])
+
+	if (!ready) return null
 
 	const width = dims.width * scale
 	const height = dims.height * scale

@@ -21,7 +21,6 @@ export default function ArenaScene()
 			<Pokemon.Dragapult position={[-2, 0.1, 4]} scale={0.025} />
 			<Trainers.Anis position={[0, 0.1, 5]} scale={0.02} />
 			<Trainers.Claire position={[0, 0.1, -5]} scale={0.02} />
-			<Trainers.Joelle position={[5, 0.1, -5]} scale ={0.02} />
 			<Trainers.Ilan position={[8, 0.1, -5]} scale ={0.02} />
 			<Trainers.Iness position={[11, 0.1, -5]} scale ={0.02} />
 			</Canvas>
