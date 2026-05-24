@@ -1,0 +1,4 @@
+@font-face {
+	font-family: 'PokemonFont';        /* le nom que TU choisis pour t'y référer */
+	src: url('./assets/PokemonDsFont.ttf'); /* le chemin vers ton fichier */
+}
