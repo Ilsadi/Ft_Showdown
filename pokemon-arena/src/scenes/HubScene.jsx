@@ -8,6 +8,7 @@ import CameraTravelling from '../components/CameraTravelling'
 import TeleLogo from '../components/TeleLogo'
 // import CameraLogger from '../components/CameraLogger'
 import DialogueBox from '../components/DialogueBox'
+import MenuTele from '../components/MenuTele'
 
 const TOTAL_ASSETS = 3   // HubCenter (1) + Joelle (1) + Happiny (1)
 
@@ -31,7 +32,8 @@ export default function HubScene()
 				<ambientLight intensity={0.5} />
 				<PokemonCenter.HubCenter onReady={handleReady} />
 				<Trainers.Joelle position={[0, 0.1, -3.2]} scale={0.02} onReady={handleReady} />
-				<TeleLogo /> 
+				<TeleLogo phase={phase} /> 
+				<MenuTele />
 				{ ready && <CameraTravelling phase={phase} onMiChemin={() => setDialogueVisible(true)} /> }
 				{/* <CameraLogger /> */}
 				{/* <OrbitControls /> */}

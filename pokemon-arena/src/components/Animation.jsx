@@ -101,34 +101,64 @@ export function useGifTexture(url)
 }
 
 //					SPRITE ANIME
-export function AnimatedSprite({ url, rotation = [0, 0, 0], position = [0, 0, 0], scale = 0.05, onReady })
+export function AnimatedSprite({ url, rotation = [0, 0, 0], position = [0, 0, 0], scale = 0.05, onReady, fadable = false, fadeDuration = 1 })
 {
-	const { texture, dims } = useGifTexture(url)
-	texture.magFilter = THREE.NearestFilter
-	texture.minFilter = THREE.NearestFilter
+    const { texture, dims } = useGifTexture(url)
+    texture.magFilter = THREE.NearestFilter
+    texture.minFilter = THREE.NearestFilter
 
-	const ready = dims.width !== 1 || dims.height !== 1
-	const signaled = useRef(false)
+    const matRef = useRef()   // ← 1. réf vers le matériau
+
+    const ready = dims.width !== 1 || dims.height !== 1
+    const signaled = useRef(false)
+    useEffect(() =>
+    {
+        if (ready && !signaled.current)
+        {
+            signaled.current = true
+            if (onReady) onReady()
+        }
+    }, [ready, onReady])
+
+    const timeRef = useRef(0)
+    const fadingRef = useRef(false)
 
 	useEffect(() =>
+    {
+        if (fadable) 
+        {
+            fadingRef.current = true
+            timeRef.current = 0     // sécurité : on reset le compteur au cas où
+        }
+    }, [fadable])
+
+	useFrame((state, delta) =>
 	{
-		if (ready && !signaled.current)
-		{
-			signaled.current = true
-			if (onReady) onReady()
-		}
-	}, [ready, onReady])
+		if (!fadable) return 
+		if (!fadingRef.current) return       // tant que le fondu n'est pas lancé, rien à faire
+		if (!matRef.current) return           // sécurité : le matériau pas encore monté
 
-	if (!ready) return null
+		timeRef.current += delta              // on accumule le temps
+		const t = timeRef.current
+		const opacity = 1 - (t / fadeDuration)
+		matRef.current.opacity = THREE.MathUtils.clamp(opacity, 0, 1)
+	})
+    if (!ready) return null
 
-	const width = dims.width * scale
-	const height = dims.height * scale
-	const adjustedPosition = [position[0], position[1] + height / 2, position[2]]
+    const width = dims.width * scale
+    const height = dims.height * scale
+    const adjustedPosition = [position[0], position[1] + height / 2, position[2]]
 
-	return (
-		<mesh rotation={rotation} position={adjustedPosition}>
-			<planeGeometry args={[width, height]} />
-			<meshBasicMaterial map={texture} alphaTest={0.5} />
-		</mesh>
-	)
+    return (
+        <mesh rotation={rotation} position={adjustedPosition}>
+            <planeGeometry args={[width, height]} />
+            <meshBasicMaterial
+                ref={matRef}              // ← 2a. on attache la réf
+                map={texture}
+                transparent={true}        // ← 2b. transparence continue…
+                opacity={1}
+				alphaTest={0.01}
+            />
+        </mesh>
+    )
 }
