@@ -17,6 +17,7 @@ export default function HubScene()
 	const { setScene } = useContext(SceneContext)
 	const [phase, setPhase] = useState("arrivee")
 	const [dialogueVisible, setDialogueVisible] = useState(false)
+	const [menuVisible, setMenuVisible] = useState(false)
 	const [loaded, setLoaded] = useState(0)
 	const ready = loaded >= TOTAL_ASSETS
 
@@ -32,8 +33,8 @@ export default function HubScene()
 				<ambientLight intensity={0.5} />
 				<PokemonCenter.HubCenter onReady={handleReady} />
 				<Trainers.Joelle position={[0, 0.1, -3.2]} scale={0.02} onReady={handleReady} />
-				<TeleLogo phase={phase} /> 
-				<MenuTele />
+				<TeleLogo phase={phase} setMenuVisible={setMenuVisible} />
+				<MenuTele visible={menuVisible} />
 				{ ready && <CameraTravelling phase={phase} onMiChemin={() => setDialogueVisible(true)} /> }
 				{/* <CameraLogger /> */}
 				{/* <OrbitControls /> */}
